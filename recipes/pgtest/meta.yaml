@@ -29,10 +29,10 @@ about:
   home: https://github.com/jamesnunn/pgtest
   license: MIT
   license_family: MIT
-  license_file: 
+  license_file: LICENSE
   summary: Creates a temporary, local PostgreSQL database cluster and server for unittesting, and cleans up after itself
-  doc_url: 
-  dev_url: 
+  doc_url: https://github.com/jamesnunn/pgtest
+  dev_url: https://github.com/jamesnunn/pgtest
 
 extra:
   recipe-maintainers:
