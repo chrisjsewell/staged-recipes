@@ -6,7 +6,8 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://github.com/chrisjsewell/{{ name }}/archive/{{ version }}.tar.gz
+  # created by `python setup.py sdist`
+  url: https://github.com/chrisjsewell/aiida-quantumespresso/releases/download/v{{ version }}/{{ version }}.tar.gz
   # sha256 is the prefered checksum -- you can get it for a file with:
   #  `openssl sha256 <file name>`.
   # You may need the openssl package, available on conda-forge
@@ -34,9 +35,10 @@ requirements:
     - reentry
     - setuptools
   run:
-    - aiida_core ==0.12.2
+    - aiida-core ==0.12.2
     - ase >=3.12
     - click
+    - postgresql >=9.4
     - python =2.7
     - setuptools
     - spglib (>=1.10,<1.11)
@@ -44,8 +46,9 @@ requirements:
 test:
   imports:
     - aiida_quantumespresso
-    - aiida_quantumespresso.calculations
-    - aiida_quantumespresso.calculations.helpers
+    # calculation imports require a backend to be loaded
+    # - aiida_quantumespresso.calculations
+    # - aiida_quantumespresso.calculations.helpers
     - aiida_quantumespresso.cli
     - aiida_quantumespresso.cli.calculations
     - aiida_quantumespresso.cli.calculations.pw
