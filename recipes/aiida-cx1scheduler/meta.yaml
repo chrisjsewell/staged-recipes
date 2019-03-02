@@ -1,4 +1,4 @@
-{% set name = "aiida-scheduler-cx1" %}
+{% set name = "aiida-cx1scheduler" %}
 {% set version = "0.2.0" %}
 
 package:
