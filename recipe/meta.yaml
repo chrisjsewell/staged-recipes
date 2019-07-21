@@ -1,5 +1,5 @@
-{% set name = "pgtest" %}
-{% set version = "1.3.0" %}
+{% set name = "prospector" %}
+{% set version = "1.1.5" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,11 +7,13 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: "3f055058723b26bdd6612726a7bf792f7630ff3f2a4b647e3a3c9bdc0192b641"
+  sha256: "a041aea15d0b1141272b97d11f2e6b5fd8cbc815eca94e647609e6437cf7da6c"
 
 build:
   number: 0
   noarch: python
+  entry_points:
+    - prospector = prospector.run:main
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
@@ -19,21 +21,48 @@ requirements:
     - pip
     - python
   run:
-    - pg8000 >=1.10
+    - dodgy >=0.1.9
+    - mccabe >=0.5.0
+    - pep8-naming >=0.3.3,<=0.4.1
+    - pycodestyle <=2.4.0,>=2.0.0
+    - pydocstyle >=2.0.0
+    - pyflakes <2.0.0,>=0.8.1
+    - pylint >=2
+    - pylint-plugin-utils >=0.2.6
     - python
+    - pyyaml
+    - requirements-detector >=0.6
+    - setoptconf >=0.2.0
 
 test:
   imports:
-    - pgtest
+    - prospector
+    - prospector.config
+    - prospector.formatters
+    - prospector.profiles
+    - prospector.tools
+    - prospector.tools.dodgy
+    - prospector.tools.frosted
+    - prospector.tools.mccabe
+    - prospector.tools.mypy
+    - prospector.tools.pep257
+    - prospector.tools.pep8
+    - prospector.tools.profile_validator
+    - prospector.tools.pyflakes
+    - prospector.tools.pylint
+    - prospector.tools.pyroma
+    - prospector.tools.vulture
+  commands:
+    - prospector --help
 
 about:
-  home: https://github.com/jamesnunn/pgtest
-  license: MIT
-  license_family: MIT
-  license_file: LICENSE
-  summary: Creates a temporary, local PostgreSQL database cluster and server for unittesting, and cleans up after itself
-  doc_url: https://github.com/jamesnunn/pgtest
-  dev_url: https://github.com/jamesnunn/pgtest
+  home: "http://prospector.readthedocs.io"
+  license: "GNU General Public v2 or later (GPLv2+)"
+  license_family: "GPL2"
+  license_file: ""
+  summary: "Prospector: python static analysis tool"
+  doc_url: ""
+  dev_url: "https://github.com/PyCQA/prospector"
 
 extra:
   recipe-maintainers:
