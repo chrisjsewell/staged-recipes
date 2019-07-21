@@ -10,7 +10,7 @@ source:
   sha256: "a041aea15d0b1141272b97d11f2e6b5fd8cbc815eca94e647609e6437cf7da6c"
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - prospector = prospector.run:main
@@ -24,19 +24,15 @@ requirements:
     - dodgy >=0.1.9
     - mccabe >=0.5.0
     - pep8-naming >=0.3.3,<=0.4.1
-    - pycodestyle <=2.4.0,>=2.0.0
+    - pycodestyle <=2.5.0,>=2.0.0  # note this was < 2.5
     - pydocstyle >=2.0.0
-    - pyflakes <2.0.0,>=0.8.1
+    - pyflakes <2.2.0,>=0.8.1  # note this was < 2.0
     - pylint >=2
     - pylint-plugin-utils >=0.2.6
     - python
     - pyyaml
     - requirements-detector >=0.6
     - setoptconf >=0.2.0
-    # Optional dependencies.
-    # - frosted >=1.4.1
-    # - vulture >=0.6,<0.25
-    # - pyroma >=2.3
 
 test:
   imports:
@@ -48,7 +44,7 @@ test:
     - prospector.tools.dodgy
     # - prospector.tools.frosted
     - prospector.tools.mccabe
-    - prospector.tools.mypy
+    # - prospector.tools.mypy
     - prospector.tools.pep257
     - prospector.tools.pep8
     - prospector.tools.profile_validator
@@ -58,6 +54,19 @@ test:
     # - prospector.tools.vulture
   commands:
     - prospector --help
+
+outputs:
+  - name: prospector
+  - name: prospector.add_ons
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - python
+        - frosted >=1.4.1
+        - pyroma >=2.3
+        - vulture >=0.6,<0.25
 
 about:
   home: "http://prospector.readthedocs.io"
