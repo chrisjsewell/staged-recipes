@@ -33,6 +33,10 @@ requirements:
     - pyyaml
     - requirements-detector >=0.6
     - setoptconf >=0.2.0
+    # Optional dependencies.
+    # - frosted >=1.4.1
+    # - vulture >=0.6,<0.25
+    # - pyroma >=2.3
 
 test:
   imports:
@@ -42,7 +46,7 @@ test:
     - prospector.profiles
     - prospector.tools
     - prospector.tools.dodgy
-    - prospector.tools.frosted
+    # - prospector.tools.frosted
     - prospector.tools.mccabe
     - prospector.tools.mypy
     - prospector.tools.pep257
@@ -50,8 +54,8 @@ test:
     - prospector.tools.profile_validator
     - prospector.tools.pyflakes
     - prospector.tools.pylint
-    - prospector.tools.pyroma
-    - prospector.tools.vulture
+    # - prospector.tools.pyroma
+    # - prospector.tools.vulture
   commands:
     - prospector --help
 
