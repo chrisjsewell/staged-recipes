@@ -1,5 +1,5 @@
 {% set name = "prospector" %}
-{% set version = "1.1.5" %}
+{% set version = "1.1.7" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,10 +7,10 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: "a041aea15d0b1141272b97d11f2e6b5fd8cbc815eca94e647609e6437cf7da6c"
+  sha256: "aba551e53dc1a5a432afa67385eaa81d7b4cf4c162dc1a4d0ee00b3a0712ad90"
 
 build:
-  number: 1
+  number: 0
   noarch: python
   entry_points:
     - prospector = prospector.run:main
@@ -21,13 +21,17 @@ requirements:
     - pip
     - python
   run:
+    - astroid ==2.2.5
     - dodgy >=0.1.9
     - mccabe >=0.5.0
     - pep8-naming >=0.3.3,<=0.4.1
-    - pycodestyle <=2.5.0,>=2.0.0  # note this was < 2.5
+    - pycodestyle <=2.5.0,>=2.0.0  # note this should be <= 2.4.0, but conflicts with flake8>=3.7
     - pydocstyle >=2.0.0
-    - pyflakes <2.2.0,>=0.8.1  # note this was < 2.0
-    - pylint >=2
+    - pyflakes <2.2.0,>=0.8.1  # note this should be < 2.0.0, but conflicts with flake8>=3.7
+    - pylint ==2.3.1
+    - pylint-celery ==0.3
+    - pylint-django >=2.0.9,<=2.0.10  # this should be ==2.0.10, but isn't release on conda-forge yet
+    - pylint-flask ==0.6
     - pylint-plugin-utils >=0.2.6
     - python
     - pyyaml
@@ -65,8 +69,9 @@ outputs:
       run:
         - python
         - frosted >=1.4.1
-        - pyroma >=2.3
+        - pyroma >=2.4
         - vulture >=0.6,<0.25
+        - mypy >=0.600
 
 about:
   home: "http://prospector.readthedocs.io"
